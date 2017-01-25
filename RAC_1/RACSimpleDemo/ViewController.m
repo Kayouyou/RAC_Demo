@@ -20,8 +20,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self updateUIState];
-    [self.userName_text addTarget:self action:@selector(usernameTextFieldChanged) forControlEvents:UIControlEventEditingChanged];
-    [self.passWord_text addTarget:self action:@selector(passwordTextFieldChanged) forControlEvents:UIControlEventEditingChanged];
+  
+    //通过RAC重构项目
+    //第一步
+     RACSignal *validUsernameSignal = [self.userName_text.rac_textSignal map:^id(NSString * text) {
+         return @([self isValidUserName:text]);
+     }];
+    RACSignal *validPasswordSignal = [self.passWord_text.rac_textSignal map:^id(NSString *text) {
+        return @([self isValidPassWord:text]);
+    }];
+    
+    //第二步
+    [[validUsernameSignal map:^id(NSNumber *usernameValid) {
+       
+        return [usernameValid boolValue] ? [UIColor clearColor]:[UIColor yellowColor];
+    }]
+    subscribeNext:^(UIColor *color) {
+
+        self.userName_text.backgroundColor = color;
+    }];
+    
+    
+    
+    
+    
+    
     //RAC 有三种信号 next error completed 一个signal 因error终结前可以发送任意数量的next事件
     // rac_textSignal 是RAC框架通过category为很多基本UIKit控件添加signal，这样你的控件就添加了订阅。
     //1,第一种写法
@@ -52,6 +75,7 @@
     */
     
     //3,map转换函数
+    /**
     [[[self.userName_text.rac_textSignal map:^id(NSString * text) {
         
         return @(text.length);
@@ -66,7 +90,7 @@
         
         NSLog(@"用户名输入框%@",x);
     }];
-    
+    */
     
     
 }
