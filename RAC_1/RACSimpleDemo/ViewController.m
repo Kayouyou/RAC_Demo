@@ -10,8 +10,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h> 
 
 @interface ViewController ()
-@property (nonatomic, assign) BOOL passwordIsValid;
-@property (nonatomic, assign) BOOL usernameIsValid;
+
 @property (nonatomic, assign) BOOL signInValid;
 @end
 
@@ -19,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self updateUIState];
   
     //通过RAC重构项目
     //第一步
@@ -51,7 +49,17 @@
         return [passwordValid boolValue] ? [UIColor clearColor]:[UIColor yellowColor];
     }];
 
-    
+    // 聚合信号，登录按钮只有当用户名和密码输入框的输入都有效时才工作。现在要把这里改成响应式的。
+    //每次产生一个新的值时，reduce block 都会执行，block的返回值会发给下一个信号。
+    RACSignal *signalActiveSignal = [RACSignal combineLatest:@[validUsernameSignal,validPasswordSignal] reduce:^id(NSNumber*usernameValid, NSNumber *passwordValid){
+        return @([usernameValid boolValue]&&[passwordValid boolValue]);
+    }];
+   
+    [signalActiveSignal subscribeNext:^(NSNumber*signupActive) {
+       
+        self.signInButton.enabled = [signupActive boolValue];
+        
+    }];
     
     
     
@@ -106,25 +114,9 @@
     
 }
 
-- (void)usernameTextFieldChanged{
-    self.usernameIsValid = [self isValidUserName:self.userName_text.text];
-    [self updateUIState];
-}
-
-- (void)passwordTextFieldChanged{
-    self.passwordIsValid = [self isValidPassWord:self.passWord_text.text];
-    [self updateUIState];
-}
-
 - (IBAction)signInBtnClicked:(UIButton *)sender {
 
 
-}
-
-- (void)updateUIState{
-    self.userName_text.backgroundColor = self.passwordIsValid ? [UIColor clearColor] : [UIColor yellowColor];
-    self.passWord_text.backgroundColor = self.usernameIsValid ? [UIColor clearColor] : [UIColor yellowColor];
-    self.signInButton.enabled = self.usernameIsValid && self.passwordIsValid;
 }
 
 - (BOOL)isValidUserName:(NSString *)username{
