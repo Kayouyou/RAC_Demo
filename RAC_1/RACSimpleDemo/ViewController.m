@@ -66,18 +66,22 @@
     // rac信号的rac_signalForControlEvents，用于事件
     [[[self.signInButton rac_signalForControlEvents:UIControlEventTouchUpInside]
      
-      //处理信号中的信号
+      //处理信号中的信号,这个操作把按钮点击事件转换为登录信号，同时还从内部信号发送事件到外部信号。
      flattenMap:^RACStream *(id value) {
        
          return [self signinSignal];//内部信号，向外部发送信号，所以使用flattenMap函数
      }]
-
-     subscribeNext:^(id x) {
+     subscribeNext:^(NSNumber*signedIn) {
        
-        NSLog(@"登陆button被点击了");
+         BOOL success = [signedIn boolValue];
+         if (success) {
+             
+             NSLog(@"执行跳转逻辑");
+         }
+            //NSLog(@"登陆button被点击了");
     }];
     
-    //创建信号
+    
     
     
     
@@ -133,6 +137,8 @@
     
     
 }
+
+#pragma mark - 创建信号
 
 - (RACSignal *)signinSignal{
     
