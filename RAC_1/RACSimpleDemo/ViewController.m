@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
+    self.signinService = [RWDummySignInService new];
     //通过RAC重构项目
     //第一步
      RACSignal *validUsernameSignal = [self.userName_text.rac_textSignal map:^id(NSString * text) {
@@ -76,9 +77,12 @@
          BOOL success = [signedIn boolValue];
          if (success) {
              
-             NSLog(@"执行跳转逻辑");
+             NSLog(@"登陆成功");
+         }else{
+             
+             NSLog(@"登陆失败");
          }
-            //NSLog(@"登陆button被点击了");
+        
     }];
     
     
