@@ -65,15 +65,23 @@
     }];
     
     // rac信号的rac_signalForControlEvents，用于事件
-    [[[self.signInButton rac_signalForControlEvents:UIControlEventTouchUpInside]
+    [[[[self.signInButton rac_signalForControlEvents:UIControlEventTouchUpInside]
      
-      //处理信号中的信号,这个操作把按钮点击事件转换为登录信号，同时还从内部信号发送事件到外部信号。
+       //附加操作,为了体验更好，点击是禁止button
+      doNext:^(id x) {
+          self.signInButton.enabled = NO;
+          
+      }]
+      
+    //处理信号中的信号,这个操作把按钮点击事件转换为登录信号，同时还从内部信号发送事件到外部信号。
      flattenMap:^RACStream *(id value) {
        
          return [self signinSignal];//内部信号，向外部发送信号，所以使用flattenMap函数
      }]
      subscribeNext:^(NSNumber*signedIn) {
-       
+       //在有结果回调时打开button
+         self.signInButton.enabled = NO;
+         
          BOOL success = [signedIn boolValue];
          if (success) {
              
@@ -146,6 +154,7 @@
 
 - (RACSignal *)signinSignal{
     
+
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
         [self.signinService
          signInWithUsername:self.userName_text.text
@@ -156,6 +165,14 @@
          }];
         return nil;
     }];
+    /**
+     上面的代码使用RACSignal的createSignal:方法来创建信号。方法的入参是一个block，这个block描述了这个信号。当这个信号有subscriber时，block里的代码就会执行。
+     
+     block的入参是一个subscriber实例，它遵循RACSubscriber协议，协议里有一些方法来产生事件，你可以发送任意数量的next事件，或者用error\complete事件来终止。本例中，信号发送了一个next事件来表示登录是否成功，随后是一个complete事件。
+     
+     这个block的返回值是一个RACDisposable对象，它允许你在一个订阅被取消时执行一些清理工作。当前的信号不需要执行清理操作，所以返回nil就可以了。
+     
+     */
 }
 
 
