@@ -31,6 +31,7 @@
     }];
     
     //第二步
+    /**
     [[validUsernameSignal map:^id(NSNumber *usernameValid) {
        
         return [usernameValid boolValue] ? [UIColor clearColor]:[UIColor yellowColor];
@@ -39,7 +40,17 @@
 
         self.userName_text.backgroundColor = color;
     }];
+    */
+    //但是上述的用法不是很好，我们可以再次精简
     
+    RAC(self.userName_text,backgroundColor) = [validUsernameSignal map:^id(NSNumber *usernameValid) {
+        return [usernameValid boolValue] ? [UIColor clearColor]:[UIColor yellowColor];
+    }];
+    
+    RAC(self.passWord_text,backgroundColor) = [validPasswordSignal map:^id(NSNumber *passwordValid) {
+        return [passwordValid boolValue] ? [UIColor clearColor]:[UIColor yellowColor];
+    }];
+
     
     
     
