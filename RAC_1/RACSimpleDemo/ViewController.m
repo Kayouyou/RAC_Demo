@@ -8,10 +8,12 @@
 
 #import "ViewController.h"
 #import <ReactiveCocoa/ReactiveCocoa.h> 
+#import "RWDummySignInService.h"//模拟HTTP请求类
 
 @interface ViewController ()
 
 @property (nonatomic, assign) BOOL signInValid;
+@property (nonatomic, strong) RWDummySignInService *signinService;
 @end
 
 @implementation ViewController
@@ -60,6 +62,24 @@
         self.signInButton.enabled = [signupActive boolValue];
         
     }];
+    
+    // rac信号的rac_signalForControlEvents，用于事件
+    [[[self.signInButton rac_signalForControlEvents:UIControlEventTouchUpInside]
+     
+      //处理信号中的信号
+     flattenMap:^RACStream *(id value) {
+       
+         return [self signinSignal];//内部信号，向外部发送信号，所以使用flattenMap函数
+     }]
+
+     subscribeNext:^(id x) {
+       
+        NSLog(@"登陆button被点击了");
+    }];
+    
+    //创建信号
+    
+    
     
     
     
@@ -114,10 +134,21 @@
     
 }
 
-- (IBAction)signInBtnClicked:(UIButton *)sender {
-
-
+- (RACSignal *)signinSignal{
+    
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber){
+        [self.signinService
+         signInWithUsername:self.userName_text.text
+         password:self.passWord_text.text
+         complete:^(BOOL success){
+             [subscriber sendNext:@(success)];
+             [subscriber sendCompleted];
+         }];
+        return nil;
+    }];
 }
+
+
 
 - (BOOL)isValidUserName:(NSString *)username{
 

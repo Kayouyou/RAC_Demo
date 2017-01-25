@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *passWord_text;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 
-- (IBAction)signInBtnClicked:(UIButton *)sender;
 
 
 @end

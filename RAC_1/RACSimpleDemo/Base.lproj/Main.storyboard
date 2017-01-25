@@ -37,9 +37,6 @@
                                     <constraint firstAttribute="width" constant="55" id="l5k-B8-K6C"/>
                                 </constraints>
                                 <state key="normal" title="sign in"/>
-                                <connections>
-                                    <action selector="signInBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O78-5G-ygO"/>
-                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Rz-q4-mpP">
                                 <rect key="frame" x="76" y="159" width="223" height="30"/>

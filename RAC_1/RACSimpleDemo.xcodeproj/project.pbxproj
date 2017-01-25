@@ -14,6 +14,7 @@
 		EF1CB2661E3828EE004D6712 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF1CB2641E3828EE004D6712 /* Main.storyboard */; };
 		EF1CB2681E3828EE004D6712 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF1CB2671E3828EE004D6712 /* Assets.xcassets */; };
 		EF1CB26B1E3828EE004D6712 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF1CB2691E3828EE004D6712 /* LaunchScreen.storyboard */; };
+		EF958D7C1E389DA8000DC94E /* RWDummySignInService.m in Sources */ = {isa = PBXBuildFile; fileRef = EF958D7B1E389DA8000DC94E /* RWDummySignInService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		EF1CB2671E3828EE004D6712 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF1CB26A1E3828EE004D6712 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF1CB26C1E3828EE004D6712 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF958D7A1E389DA8000DC94E /* RWDummySignInService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWDummySignInService.h; sourceTree = "<group>"; };
+		EF958D7B1E389DA8000DC94E /* RWDummySignInService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWDummySignInService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				EF1CB25F1E3828EE004D6712 /* AppDelegate.m */,
 				EF1CB2611E3828EE004D6712 /* ViewController.h */,
 				EF1CB2621E3828EE004D6712 /* ViewController.m */,
+				EF958D7A1E389DA8000DC94E /* RWDummySignInService.h */,
+				EF958D7B1E389DA8000DC94E /* RWDummySignInService.m */,
 				EF1CB2641E3828EE004D6712 /* Main.storyboard */,
 				EF1CB2671E3828EE004D6712 /* Assets.xcassets */,
 				EF1CB2691E3828EE004D6712 /* LaunchScreen.storyboard */,
@@ -229,6 +234,7 @@
 				EF1CB2631E3828EE004D6712 /* ViewController.m in Sources */,
 				EF1CB2601E3828EE004D6712 /* AppDelegate.m in Sources */,
 				EF1CB25D1E3828EE004D6712 /* main.m in Sources */,
+				EF958D7C1E389DA8000DC94E /* RWDummySignInService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +395,7 @@
 				EF1CB2711E3828EE004D6712 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
