@@ -58,6 +58,16 @@
     }];
 }
 
+#pragma mark - 手势事件
+- (void)tapGestureEvent{
+    self.view.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+    
+    [[tap rac_gestureSignal] subscribeNext:^(id x) {
+        NSLog(@"手势事件触发");
+    }];
+    [self.view addGestureRecognizer:tap];
+}
 
 
 - (void)didReceiveMemoryWarning {
