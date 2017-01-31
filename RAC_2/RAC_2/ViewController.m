@@ -43,10 +43,20 @@
         //@strongify(self);
         NSLog(@"输入框x的值 %@",x);
     }];
-    
 }
 
-
+#pragma mark - button点击事件监听
+- (void)buttonClicked{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"RAC点击" forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor redColor];
+    [self.view addSubview:button];
+    
+    @weakify(self);
+    [[button rac_signalForControlEvents:UIControlEventTouchUpInside]subscribeNext:^(id x) {
+        NSLog(@"点击了button");
+    }];
+}
 
 
 
