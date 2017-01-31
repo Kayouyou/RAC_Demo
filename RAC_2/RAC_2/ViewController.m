@@ -69,6 +69,20 @@
     [self.view addGestureRecognizer:tap];
 }
 
+#pragma mark - 通知中心
+- (void)notifierEvent{
+    
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"notifyName" object:nil] subscribeNext:^(id x) {
+       
+    }];
+}
+
+
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
