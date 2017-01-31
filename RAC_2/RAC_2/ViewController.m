@@ -77,6 +77,23 @@
     }];
 }
 
+#pragma mark - 代理
+- (void)delegateEvent{
+    
+    UIAlertView*alert  = [[UIAlertView alloc] initWithTitle:@"RAC_ALERT" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"sure", nil];
+    [alert show];
+    //第一种方式
+    [[self rac_signalForSelector:@selector(alertView:clickedButtonAtIndex:) fromProtocol:@protocol(UIAlertViewDelegate)] subscribeNext:^(id x) {
+      //返回的是RACTuple
+        RACTuple *tuple = (RACTuple *)x;
+        NSLog(@"%@ %@",tuple.first,tuple.second);
+    }];
+    //第二种方式
+    [[alert rac_buttonClickedSignal] subscribeNext:^(id x) {
+       
+        
+    }];
+}
 
 
 
