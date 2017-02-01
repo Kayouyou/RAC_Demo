@@ -81,7 +81,7 @@
     /**
      如何拿到执行命令中产生的数据呢？
      订阅命令内部的信号
-     直接订阅执行命令返回的信号
+     方式一：直接订阅执行命令返回的信号
      */
 
     //2，执行命令
@@ -92,6 +92,32 @@
     }];
 }
 
+// 一般的用法
+- (void)generalMethod{
+    
+    RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        //input为传进来的参数
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            [subscriber sendNext:@"AFN_Data"];
+            return nil;
+            
+        }];
+    }];
+    
+    /**
+     方式二：必须先订阅才能发送命令
+     executionSignals :信号源，信号中的信号，
+     */
+    [command.executionSignals subscribeNext:^(id x) {
+       
+        [x subscribeNext:^(id x) {
+            
+       }];
+        
+    }];
+    
+    [command execute:@2];
+}
 
 
 
