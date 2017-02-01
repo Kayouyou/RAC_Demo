@@ -106,6 +106,27 @@
     }];
 }
 
+#pragma mark - 多次请求都获取到数据时才能更细UI界面
+- (void)requestManyTimes{
+    RACSignal *requestOne = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        [subscriber sendNext:@"发送请求1的数据"];
+        return nil;
+    }];
+    RACSignal *requestTwo = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+       
+        [subscriber sendNext:@"发送请求2的数据"];
+        return nil;
+    }];
+    
+    [self rac_liftSelector:@selector(updateUI) withSignals:@[requestOne,requestTwo]];
+}
+
+#pragma mark - 更新UI
+
+- (void)updateUI{
+    NSLog(@"处理跟新UI界面触发");
+}
 
 
 
