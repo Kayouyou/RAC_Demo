@@ -14,6 +14,7 @@
 		EF3AFDED1E40C3870078B4CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3AFDEB1E40C3870078B4CA /* Main.storyboard */; };
 		EF3AFDEF1E40C3870078B4CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF3AFDEE1E40C3870078B4CA /* Assets.xcassets */; };
 		EF3AFDF21E40C3870078B4CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3AFDF01E40C3870078B4CA /* LaunchScreen.storyboard */; };
+		EF3AFDFD1E41EFF60078B4CA /* TwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3AFDFC1E41EFF60078B4CA /* TwoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		EF3AFDF11E40C3870078B4CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF3AFDF31E40C3870078B4CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF3AFDFA1E40C5150078B4CA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		EF3AFDFB1E41EFF60078B4CA /* TwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoViewController.h; sourceTree = "<group>"; };
+		EF3AFDFC1E41EFF60078B4CA /* TwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,9 @@
 				EF3AFDE61E40C3870078B4CA /* AppDelegate.m */,
 				EF3AFDE81E40C3870078B4CA /* ViewController.h */,
 				EF3AFDE91E40C3870078B4CA /* ViewController.m */,
+				EF3AFDFE1E41F54D0078B4CA /* New Group */,
+				EF3AFDFB1E41EFF60078B4CA /* TwoViewController.h */,
+				EF3AFDFC1E41EFF60078B4CA /* TwoViewController.m */,
 				EF3AFDEB1E40C3870078B4CA /* Main.storyboard */,
 				EF3AFDEE1E40C3870078B4CA /* Assets.xcassets */,
 				EF3AFDF01E40C3870078B4CA /* LaunchScreen.storyboard */,
@@ -103,6 +109,13 @@
 				EF3AFDE31E40C3870078B4CA /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF3AFDFE1E41F54D0078B4CA /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +244,7 @@
 				EF3AFDEA1E40C3870078B4CA /* ViewController.m in Sources */,
 				EF3AFDE71E40C3870078B4CA /* AppDelegate.m in Sources */,
 				EF3AFDE41E40C3870078B4CA /* main.m in Sources */,
+				EF3AFDFD1E41EFF60078B4CA /* TwoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

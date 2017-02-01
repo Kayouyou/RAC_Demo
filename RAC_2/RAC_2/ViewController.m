@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "TwoViewController.h"
 //关于RAC的一些小知识点
 
 @interface ViewController ()<UITextFieldDelegate,UIScrollViewDelegate>
@@ -196,12 +197,51 @@
     
     //取消订阅
     [disposable dispose];
-    
-    
 }
 
+/***** 第二 RACSubject使用 *****/
+/**
+ 
+ RACSubject介绍：它既是信号提供者，本身也是信号，可以发送信号。
+ 
+ 使用场景：通常用来代替代理，有了它就不必定义代理了
+ 
+ 需求：
+ 1，给当前的控制器添加一个按钮，push到另外一个控制器界面
+ 2，另外一个控制器view中有个按钮，点击按钮，返回控制器的第一个界面并接受第二个界面的数据
+ */
 
 
+/**
+ 模拟页面一
+ */
+
+- (void)viewOneMethod{
+    
+    UIButton *button = [[UIButton alloc] init];
+    [button setBackgroundColor:[UIColor redColor]];
+    [self.view addSubview:button];
+    [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        TwoViewController *twovc = [TwoViewController new];
+        //创建信号
+        twovc.subject = [RACSubject subject];
+        //订阅信号
+        [twovc.subject subscribeNext:^(id x) {//这里的x既是sendNext发来的信号
+            NSLog(@"视图控制器二传回的数据 %@",x);
+        }];
+        [self.navigationController pushViewController:twovc animated:YES];
+    }];
+    
+    /**
+     RACSubject和RACReplaySubject的区别
+     前者必须先订阅之后才可以发送信号，而后者可以先发信号在订阅
+    
+     RACSubject:底层实现和RACSignal不一样
+     1，调用subscribleNext订阅信号，只是把订阅者保存起来，并且订阅者的nextBlock已经赋值了
+     2，调用sendNext发送信号，遍历刚刚保存的所有订阅者，一个个调用订阅者的nextBlock;
+     */
+    
+}
 
 
 
