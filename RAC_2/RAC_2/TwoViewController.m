@@ -142,6 +142,40 @@
     [command execute:@3];
 }
 
+//监听事件有没有完成
+
+- (void)monitorIsCompleted{
+    
+    RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            [subscriber sendNext:@"afnData"];
+            
+            [subscriber sendCompleted];
+            return nil;
+        }];
+    }];
+    
+    [command.executing subscribeNext:^(id x) {
+       
+        if ([x boolValue]) {//正在执行
+            
+            
+        }else{//执行完毕，或还未执行
+            
+        }
+    }];
+    
+    //执行命令
+    [command execute:@4];
+}
+
+
+
+
+
+
+
 
 
 
