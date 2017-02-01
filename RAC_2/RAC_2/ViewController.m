@@ -161,7 +161,7 @@
 
 - (void)baseClassRACSignal{
    
-    //创建信号
+    //1， 创建信号
     RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
        
         //block调用时刻，每当有订阅者订阅信号，就会调用block
@@ -180,15 +180,22 @@
         return [RACDisposable disposableWithBlock:^{
 
             //block的调用时刻：当信号发送完成或者发送错误，就会自动执行这个block，取消订阅信号
-            
-        
-            
         }];
         
     }];
     
+    //2，订阅信号
+    /**
+     subscribleNext 把nextblock保存到订阅者里面
+     只要订阅信号就会返回一个取消订阅信号的类
+     */
+    RACDisposable *disposable = [signal subscribeNext:^(id x) {
+       //block的调用时刻，每当有信号发出数据的时候们就会调用block
+        
+    }];
     
-    
+    //取消订阅
+    [disposable dispose];
     
     
 }
