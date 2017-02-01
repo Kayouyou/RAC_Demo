@@ -91,7 +91,6 @@
 				EF3AFDE61E40C3870078B4CA /* AppDelegate.m */,
 				EF3AFDE81E40C3870078B4CA /* ViewController.h */,
 				EF3AFDE91E40C3870078B4CA /* ViewController.m */,
-				EF3AFDFE1E41F54D0078B4CA /* New Group */,
 				EF3AFDFB1E41EFF60078B4CA /* TwoViewController.h */,
 				EF3AFDFC1E41EFF60078B4CA /* TwoViewController.m */,
 				EF3AFDEB1E40C3870078B4CA /* Main.storyboard */,
@@ -109,13 +108,6 @@
 				EF3AFDE31E40C3870078B4CA /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		EF3AFDFE1E41F54D0078B4CA /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
