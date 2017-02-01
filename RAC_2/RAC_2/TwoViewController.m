@@ -119,7 +119,28 @@
     [command execute:@2];
 }
 
+//高级用法
 
+- (void)lessLowerMethod{
+    
+    RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            [subscriber sendNext:@"发送afn数据"];
+            return nil;
+        }];
+    }];
+    /**
+     方式三：switchToLatest 获取最新发送的信号，只能用于信号中的信号
+     
+     */
+    [command.executionSignals.switchToLatest subscribeNext:^(id x) {
+        
+    }];
+    
+    //执行命令
+    [command execute:@3];
+}
 
 
 
