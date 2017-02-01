@@ -128,14 +128,49 @@
     NSLog(@"处理跟新UI界面触发");
 }
 
-
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 定时器
+- (void)RACTimer{
+    
+    //延时2秒执行block
+    [[RACScheduler mainThreadScheduler] afterDelay:2 schedule:^{
+        
+    }];
+    //间隔1秒中执行一次block
+    [[RACSignal interval:1 onScheduler:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+       
+    }];
 }
+
+/***** 第二 核心类使用 *****/
+/**
+ 
+ RACSignal使用步骤：
+ 1，创建信号 + (RACSignal *)createSignal......
+ 2，订阅信号，才会激活信号，-(RACDisposable *)subscribeNext:......
+ 3，发送信号 -(void)sendNext:(id)value......
+ 
+ RACSignal底层实现：
+ 1，创建信号，首先把didSubscrible保存到信号中，还不会触发
+ 2，当信号被订阅，也就是调用signal的subscribleNext:nextBlock
+ 3，subscriblrNext内部
+ 
+ 
+ 
+ 
+ 
+ */
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @end
