@@ -143,7 +143,14 @@
 }
 
 //监听事件有没有完成
-
+/**
+ RACCommand 通常用来表示某个action的执行，比如点击button，它有几个比较重要的属性
+ executionSignals/ errors /executing
+ 
+ 1，executionSignals 是信号中的信号，如果直接subscrible的话会得到一个signal，而不是我们想要的value，所以一般配合switchToLatest。
+ 2，errors 跟正常的signal不一样，RACCommand的错误不是通过sendError实现的，而是通过errors的属性传递的
+ 3，executing 表示该command当前是否正在执行
+ */
 - (void)monitorIsCompleted{
     
     RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
