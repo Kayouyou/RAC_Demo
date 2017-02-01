@@ -152,15 +152,46 @@
  RACSignal底层实现：
  1，创建信号，首先把didSubscrible保存到信号中，还不会触发
  2，当信号被订阅，也就是调用signal的subscribleNext:nextBlock
- 3，subscriblrNext内部
- 
- 
- 
- 
- 
+ 3，subscriblrNext内部会创建订阅者subscribler,并且把nextBlock 保存在subscribler中
+ 4，subscribler内部会调用signal的didSubscrible
+ 5，signal的didSubscrible中调用subscribler endNext:@1...
+ 6，sendNext底层就是执行subscribler的nextBlock
+
  */
 
+- (void)baseClassRACSignal{
+   
+    //创建信号
+    RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+       
+        //block调用时刻，每当有订阅者订阅信号，就会调用block
+        //发送信号
+        [subscriber sendNext:@"AFN_Data"];
+        [subscriber sendCompleted];
+        
+        /**
+         取消信号：如果信号想要被取消，就必须返回一个racdisposable
+         信号什么时候被取消：1，自动取消，当一个信号的订阅者被销毁的时候，会自动取消订阅
+                         2，手动取消，
+         
+         block什么时候调用，一旦一个信号被取消订阅就会调用
+         block的作用：当信号被销毁的时候用于清空一些资源
+         */
+        return [RACDisposable disposableWithBlock:^{
 
+            //block的调用时刻：当信号发送完成或者发送错误，就会自动执行这个block，取消订阅信号
+            
+        
+            
+        }];
+        
+    }];
+    
+    
+    
+    
+    
+}
 
 
 
