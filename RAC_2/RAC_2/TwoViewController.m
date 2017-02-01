@@ -237,7 +237,43 @@
     [connection connect];
 }
 
+#pragma mark - 映射
 
+- (void)map{
+    
+    /**
+     map 的使用步骤：
+     1，传入一个block，类型是返回对象，参数是value
+     2，value就是源信号的内容，直接拿到源信号的内容做处理
+     3，把处理好的内容直接返回就好了，不用包装成信号，返回的值，就是映射的值
+     
+     map的底层实现：
+     1，map的底层其实是调用faltternMap，map中block的返回值会作为flatternMap的中的block的值
+     2，当订阅绑定信号，就会生成bindBlock
+     3，当源信号发送内容，就会调用bindBlock（value，*stop）
+     4，调用bindBlock，内部就会调用faltternMap的block
+     5，faltternMap的block内部救护调用map中的block，把map的block返回的内容包装成返回的信号
+     6，返回的信号最终会作为bindBlock中的返回信号，当做bindblock的返回信号
+     7，订阅bindBlock的返回信号就会拿绑定信号的订阅者，把处理完成的信号发送过来
+     
+     map的作用就是把源信号的值映射成一个新的值
+     */
+    
+    //创建信号
+    RACSubject *subject = [RACSubject subject];
+    //绑定信号
+    RACSignal *signal = [subject map:^id(id value) {
+       
+        return [NSString stringWithFormat:@"ws:%@",value];
+    }];
+    //订阅绑定信号
+    [signal subscribeNext:^(id x) {
+        
+    }];
+    
+    //发送信号
+    [subject sendNext:@"123"];
+}
 
 
 
