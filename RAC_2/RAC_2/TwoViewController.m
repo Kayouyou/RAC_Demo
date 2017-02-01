@@ -275,6 +275,38 @@
     [subject sendNext:@"123"];
 }
 
+/**
+ flatternMap 与 Map的区别
+ 1,前者中的block返回信号
+ 2，后者中的block返回对象
+ 3，开发中如果信号发出的值不是信号，映射一般使用map
+ 4，开发中如果信号发出的值是信号，映射一般使用flatternMap
+
+ */
+
+- (void)faltternMap{
+    
+    RACSubject *subject  = [RACSubject subject];
+    
+    RACSignal *signal = [subject flattenMap:^RACStream *(id value) {
+       
+        return value;
+    }];
+    
+    [signal subscribeNext:^(id x) {
+        
+    }];
+    
+    [subject sendNext:@"123456"];
+    
+}
+
+
+
+
+
+
+
 
 
 @end
