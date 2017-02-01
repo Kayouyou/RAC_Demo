@@ -65,6 +65,34 @@
  
  */
 
+//正常用法
+- (void)normalCommand{
+    //1，创建命令
+    RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        //block调用，执行命令的时候就胡调用
+        
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+           
+            [subscriber sendNext:@"AFN_Data"];
+            return nil;
+        }];
+    }];
+    
+    /**
+     如何拿到执行命令中产生的数据呢？
+     订阅命令内部的信号
+     直接订阅执行命令返回的信号
+     */
+
+    //2，执行命令
+    RACSignal *signal = [command execute:@1];
+    //3,订阅信号
+    [signal subscribeNext:^(id x) {
+        
+    }];
+}
+
+
 
 
 
