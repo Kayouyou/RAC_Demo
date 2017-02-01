@@ -8,8 +8,8 @@
 
 #import "TwoViewController.h"
 
-@interface TwoViewController ()
-
+@interface TwoViewController ()<UITextFieldDelegate>
+@property (nonatomic, strong) UITextField * textField;
 @end
 
 @implementation TwoViewController
@@ -300,8 +300,95 @@
     [signal sendNext:@"123456"];
 }
 
+#pragma mark - 过滤
 
+//1,跳跃: skip传入2  跳过前面两个值
+- (void)skip{
+    
+    RACSubject *subject = [RACSubject subject];
+    [[subject skip:2] subscribeNext:^(id x) {
+        NSLog(@"%@",x);
+    }];
+    [subject sendNext:@1];
+    [subject sendNext:@2];
+    [subject sendNext:@3];
+}
 
+//2，distinctUntilChanged:如果当前的值跟上一次的值一样，就会被订阅到
+- (void)distinctUntilChanged{
+    
+    RACSubject *subject = [RACSubject subject];
+    [[subject distinctUntilChanged] subscribeNext:^(id x) {
+        
+    }];
+    [subject sendNext:@1];
+    [subject sendNext:@2];
+    [subject sendNext:@2];//不会被订阅
+}
+
+//3,take 可以屏蔽一些值，去拿前面的几个值
+- (void)take{
+    
+    RACSubject *subject = [RACSubject subject];
+    [[subject take:2] subscribeNext:^(id x) {
+        
+    }];
+    
+    [subject sendNext:@1];
+    [subject sendNext:@2];
+    [subject sendNext:@3];//前两个会订阅，最后一个不会被订阅
+}
+
+//4,takeLast 取最后几个值，一定要调用 sendCompleted，告诉他发送完成，这样才能取到最后的几个值
+- (void)takeLast{
+    RACSubject *subject = [RACSubject subject];
+    [[subject takeLast:2] subscribeNext:^(id x) {
+        
+    }];
+    [subject sendNext:@1];
+    [subject sendNext:@2];
+    [subject sendNext:@3];
+    [subject sendCompleted];//必须调用
+    
+}
+
+//5,takeUntil：给它传的是哪个信号，那么当这个信号发送信号或者sendCompleted,就不能再接收源信号的内容了
+- (void)takeUntil{
+    
+    RACSubject *subjectOne = [RACSubject subject];
+    RACSubject *subjectTwo = [RACSubject subject];
+    [[subjectOne takeUntil:subjectTwo] subscribeNext:^(id x) {
+        
+    }];
+    // 发送信号
+    [subjectOne sendNext:@1];
+    [subjectOne sendNext:@2];
+    [subjectTwo sendNext:@3];  // 1
+    //    [subjectTwo sendCompleted]; // 或2
+    [subjectOne sendNext:@4];
+    
+}
+
+//6,ignore忽略掉一些值，
+- (void)ignore{
+    
+    RACSubject *subject = [RACSubject subject];
+    RACSignal *ignoreSignal = [subject ignore:@2];
+    [ignoreSignal subscribeNext:^(id x) {
+        
+    }];
+    [subject sendNext:@2];
+}
+
+//7,过滤
+- (void)filter{
+    
+    [[self.textField.rac_textSignal filter:^BOOL(id value) {
+        return [value length] > 5;
+    }] subscribeNext:^(id x) {
+        NSLog(@"");
+    }];
+}
 
 
 
