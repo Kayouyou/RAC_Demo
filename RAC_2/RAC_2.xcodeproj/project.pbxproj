@@ -15,6 +15,8 @@
 		EF3AFDEF1E40C3870078B4CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF3AFDEE1E40C3870078B4CA /* Assets.xcassets */; };
 		EF3AFDF21E40C3870078B4CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF3AFDF01E40C3870078B4CA /* LaunchScreen.storyboard */; };
 		EF3AFDFD1E41EFF60078B4CA /* TwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3AFDFC1E41EFF60078B4CA /* TwoViewController.m */; };
+		EF3AFE021E4258230078B4CA /* ThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3AFE001E4258230078B4CA /* ThreeViewController.m */; };
+		EF3AFE031E4258230078B4CA /* ThreeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF3AFE011E4258230078B4CA /* ThreeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,9 @@
 		EF3AFDFA1E40C5150078B4CA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		EF3AFDFB1E41EFF60078B4CA /* TwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoViewController.h; sourceTree = "<group>"; };
 		EF3AFDFC1E41EFF60078B4CA /* TwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoViewController.m; sourceTree = "<group>"; };
+		EF3AFDFF1E4258230078B4CA /* ThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeViewController.h; sourceTree = "<group>"; };
+		EF3AFE001E4258230078B4CA /* ThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeViewController.m; sourceTree = "<group>"; };
+		EF3AFE011E4258230078B4CA /* ThreeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +98,9 @@
 				EF3AFDE91E40C3870078B4CA /* ViewController.m */,
 				EF3AFDFB1E41EFF60078B4CA /* TwoViewController.h */,
 				EF3AFDFC1E41EFF60078B4CA /* TwoViewController.m */,
+				EF3AFDFF1E4258230078B4CA /* ThreeViewController.h */,
+				EF3AFE001E4258230078B4CA /* ThreeViewController.m */,
+				EF3AFE011E4258230078B4CA /* ThreeViewController.xib */,
 				EF3AFDEB1E40C3870078B4CA /* Main.storyboard */,
 				EF3AFDEE1E40C3870078B4CA /* Assets.xcassets */,
 				EF3AFDF01E40C3870078B4CA /* LaunchScreen.storyboard */,
@@ -175,6 +183,7 @@
 				EF3AFDF21E40C3870078B4CA /* LaunchScreen.storyboard in Resources */,
 				EF3AFDEF1E40C3870078B4CA /* Assets.xcassets in Resources */,
 				EF3AFDED1E40C3870078B4CA /* Main.storyboard in Resources */,
+				EF3AFE031E4258230078B4CA /* ThreeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +246,7 @@
 				EF3AFDE71E40C3870078B4CA /* AppDelegate.m in Sources */,
 				EF3AFDE41E40C3870078B4CA /* main.m in Sources */,
 				EF3AFDFD1E41EFF60078B4CA /* TwoViewController.m in Sources */,
+				EF3AFE021E4258230078B4CA /* ThreeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
