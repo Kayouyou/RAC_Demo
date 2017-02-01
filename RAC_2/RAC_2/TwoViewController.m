@@ -286,19 +286,18 @@
 
 - (void)faltternMap{
     
-    RACSubject *subject  = [RACSubject subject];
-    
-    RACSignal *signal = [subject flattenMap:^RACStream *(id value) {
+    RACSubject *signals  = [RACSubject subject];
+    RACSubject *signal   = [RACSubject subject];
+    [[signals flattenMap:^RACStream *(id value) {
        
         return value;
+    }] subscribeNext:^(id x) {
+        NSLog(@"%@",x);
     }];
     
-    [signal subscribeNext:^(id x) {
-        
-    }];
-    
-    [subject sendNext:@"123456"];
-    
+    //发送信号
+    [signals sendNext:signal];
+    [signal sendNext:@"123456"];
 }
 
 
