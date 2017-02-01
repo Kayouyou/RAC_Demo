@@ -9,7 +9,7 @@
 #import "ViewController.h"
 //关于RAC的一些小知识点
 
-@interface ViewController ()<UITextFieldDelegate>
+@interface ViewController ()<UITextFieldDelegate,UIScrollViewDelegate>
 
 @end
 
@@ -95,6 +95,16 @@
     }];
 }
 
+#pragma mark - KVO 事件
+- (void)KVOEvent{
+    UIScrollView *scrollView = [[UIScrollView alloc]init];
+    scrollView.delegate = self;
+    [self.view addSubview:scrollView];
+    
+    [RACObserve(scrollView, contentOffset) subscribeNext:^(id x) {
+        NSLog(@"scrollView的偏移量 %@",x);
+    }];
+}
 
 
 
