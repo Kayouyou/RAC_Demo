@@ -177,10 +177,65 @@
     [command execute:@4];
 }
 
+/***** 第四 RACMulticastConnection的使用 *****/
 
+/**
+ RACMulticastConnection：用于当一个信号被多次的订阅时，为了保证信号创建的时被多次的调用创建信号中的block，造成副作用，可以使用这个类处理。
+ 
+ 使用注意：它是通过RACSignal的publish或者muticast方法创建的
+ 
+ 使用步骤：
+ 1，创建信号
+ 2，创建链接 RACMulticastConnection *connect = [signal publish]
+ 3，订阅信号，注意订阅的不在是之前的信号，而是链接的信号。[cpnnect.signal subscribeNext]
+ 4，链接 [connect connect]
+ 
+ RACMulticastConnection 底层的原理
+ 1,创建connect，connect.sourceSignal ->RACSignal（原始信号）connect.signal -> RACSubject
+ 2，订阅connect.signal，会调用RACSubejct的subscribeNext，创建订阅者，而且吧订阅者保存起来而不会执行block
+ 3，【connect sonnect】内部会订阅RACSignal（原始信号）
+ 4，订阅原始信号，就会调用原始信号中的didSubscibe
+ 5，didSubscribe，拿到订阅者调用sendNext 其实是调用RACSubeject的sendNext
+ 6，RACSubject的sendNext会遍历RACSubejct的所有订阅者发送信号
+ 7，因为刚刚第二步，都在订阅RACSubject，因此会拿到第二步的所有订阅者，调用他们的nextBlock
+ 
+ */
 
-
-
+- (void)sendNextManyTimes{
+    
+    RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+       
+        [subscriber sendNext:@"afn"];
+        return nil;
+    }];
+    
+    [signal subscribeNext:^(id x) {
+        
+    }];
+    [signal subscribeNext:^(id x) {
+        
+    }];
+    [signal subscribeNext:^(id x) {
+        
+    }];
+    
+    //上面的做法不太好，应该是无论有多少个只发送一个
+    // 比较好的做法 创建链接类
+    RACMulticastConnection *connection = [signal publish];
+    
+    [connection.signal subscribeNext:^(id x) {
+        
+    }];
+    [connection.signal subscribeNext:^(id x) {
+        
+    }];
+    [connection.signal subscribeNext:^(id x) {
+        
+    }];
+    
+    //连接，只有链接才会把信号源变为热信号
+    [connection connect];
+}
 
 
 
